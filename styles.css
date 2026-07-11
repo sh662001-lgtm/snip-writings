@@ -85,10 +85,7 @@ img {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr);
-  gap: 2rem;
-  align-items: start;
+  display: block;
   padding: 3rem 0 2rem;
 }
 
