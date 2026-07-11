@@ -1,0 +1,265 @@
+:root {
+  --bg: #fffdf8;
+  --surface: #ffffff;
+  --text: #111111;
+  --muted: #5a5a5a;
+  --border: #e6e2dd;
+  --accent: #b7634d;
+  --accent-soft: #f0d9d3;
+  --shadow: 0 18px 55px rgba(22, 18, 16, 0.08);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.site-header {
+  background: linear-gradient(180deg, rgba(183, 99, 77, 0.2), rgba(255, 255, 255, 0.9));
+  border-bottom: 1px solid rgba(206, 182, 171, 0.5);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr);
+  gap: 2rem;
+  align-items: start;
+  padding: 3rem 0 2rem;
+}
+
+.hero-copy h1,
+.hero-copy p {
+  margin: 0;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.75rem, 3.5vw, 4.25rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 1.75rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.button:hover {
+  opacity: 0.95;
+}
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.feature-list li {
+  background: var(--accent-soft);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.preview-section {
+  padding-bottom: 3rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.small-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.post-card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.post-card p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.post-card a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.category-pill {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #f7eef0;
+  color: #9b4e40;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.post-page, .content-page {
+  padding: 3rem 0 4rem;
+}
+
+.post-page article,
+.content-page section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.post-page article h1 {
+  margin-top: 0;
+}
+
+.post-page article p {
+  margin: 1.2rem 0;
+}
+
+.post-page article blockquote {
+  border-left: 4px solid var(--accent);
+  margin: 1.75rem 0;
+  padding-left: 1rem;
+  color: var(--muted);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.75rem 0;
+  color: var(--muted);
+}
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}

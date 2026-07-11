@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post | SNip Writings</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="eyebrow">SNip Writings</p>
+        <h1>Post</h1>
+      </div>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="posts.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container post-page">
+    <article id="post-content"></article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>SNip Writings — writing for curious readers.</p>
+    </div>
+  </footer>
+
+  <script src="posts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const id = new URLSearchParams(location.search).get('id');
+      renderPostPage(document.getElementById('post-content'), id);
+    });
+  </script>
+</body>
+</html>

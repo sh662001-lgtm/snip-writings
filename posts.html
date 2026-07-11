@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | SNip Writings</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="eyebrow">SNip Writings</p>
+        <h1>Blog</h1>
+      </div>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="posts.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="preview-section">
+      <div class="section-header">
+        <h2>All posts</h2>
+        <div class="filter-links">
+          <a href="posts.html">All</a>
+          <a href="posts.html?category=Stories">Stories</a>
+          <a href="posts.html?category=Politics">Politics</a>
+          <a href="posts.html?category=Books">Books</a>
+          <a href="posts.html?category=Food">Food</a>
+          <a href="posts.html?category=Opinion">Opinion</a>
+        </div>
+      </div>
+      <div id="post-list" class="post-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>SNip Writings — keep writing, keep sharing.</p>
+    </div>
+  </footer>
+
+  <script src="posts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const category = new URLSearchParams(location.search).get('category');
+      renderPostList(document.getElementById('post-list'), category);
+    });
+  </script>
+</body>
+</html>
