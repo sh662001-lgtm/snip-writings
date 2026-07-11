@@ -24,7 +24,16 @@ This is a simple static blog website for SNip Writings.
 
 3. Open `http://localhost:8000` in your browser.
 
-## How to add a new post
+## How to use the site
+
+- Open `index.html` to see the three-tab blog.
+- Use the `New Post` tab to write and save your posts directly in the browser.
+- Use the `Posts` tab to browse saved posts sorted by category.
+- Use the `About` tab to update your bio and blog description.
+
+Saved posts are stored in your browser's local storage. If you want the content to work on every device, you can also add posts directly to `posts.js`.
+
+## How to add a post by editing code
 
 1. Open `posts.js`.
 2. Add a new object to the `postsData` array with `id`, `title`, `date`, `category`, `excerpt`, and `content`.

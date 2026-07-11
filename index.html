@@ -14,10 +14,9 @@
         <h1>Creative stories, politics, food, and books</h1>
       </div>
       <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="posts.html">Blog</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <button class="tab-button active" type="button" data-tab="new-post">New Post</button>
+        <button class="tab-button" type="button" data-tab="posts">Posts</button>
+        <button class="tab-button" type="button" data-tab="about">About</button>
       </nav>
     </div>
   </header>
@@ -26,11 +25,10 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="subtitle">Welcome to SNip Writings — a personal blog for stories, opinions, food notes, and book thoughts.</p>
-        <p>Here, I write from the heart. Explore short stories, political commentary, honest book reviews, and food reflections. New posts appear whenever inspiration strikes.</p>
-        <a class="button" href="posts.html">Read the blog</a>
+        <p>Use the tabs above to create a new post, browse your writing by category, or learn more about the blog.</p>
       </div>
       <div class="hero-card">
-        <p class="card-title">Featured categories</p>
+        <p class="card-title">Your categories</p>
         <ul class="feature-list">
           <li>Stories</li>
           <li>Politics</li>
@@ -41,26 +39,75 @@
       </div>
     </section>
 
-    <section class="preview-section">
+    <section id="new-post" class="tab-panel active">
       <div class="section-header">
-        <h2>Latest posts</h2>
-        <a class="small-link" href="posts.html">See all posts</a>
+        <h2>New Post</h2>
       </div>
-      <div id="latest-posts" class="post-grid"></div>
+      <form id="post-form" class="post-form">
+        <div class="form-grid">
+          <label>
+            Title
+            <input type="text" id="post-title" placeholder="Enter your post title" required />
+          </label>
+          <label>
+            Date
+            <input type="date" id="post-date" />
+          </label>
+          <label>
+            Category
+            <select id="post-category" required>
+              <option value="">Choose a category</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Excerpt
+          <textarea id="post-excerpt" rows="3" placeholder="Enter a short summary" required></textarea>
+        </label>
+        <label>
+          Content
+          <textarea id="post-content" rows="8" placeholder="Write your post content here" required></textarea>
+        </label>
+        <button class="button" type="submit">Save post</button>
+        <p id="form-message" class="form-message"></p>
+      </form>
+    </section>
+
+    <section id="posts" class="tab-panel">
+      <div class="section-header">
+        <div>
+          <h2>Posts</h2>
+          <p class="subtitle">Browse your writing by category and read the full post content.</p>
+        </div>
+        <div id="category-filters" class="filter-links"></div>
+      </div>
+      <div id="post-list" class="post-grid"></div>
+      <div id="post-detail" class="post-detail hidden"></div>
+    </section>
+
+    <section id="about" class="tab-panel">
+      <div class="section-header">
+        <h2>About</h2>
+      </div>
+      <div class="content-card">
+        <p>SNip Writings is your personal space to share real writing about stories, politics, food, and books. It is built to keep your voice easy to publish and simple for readers to browse.</p>
+        <p>Use the New Post tab to write directly in the browser. Your posts are saved locally in your browser, so you can keep writing and publish from here.</p>
+        <p>This site is meant to be a living journal that grows with your writing. Add a post, tag it with the right category, and then use the Posts tab to read and review your work.</p>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>SNip Writings — writing for curious readers.</p>
-      <p>Start with one post and keep writing.</p>
+      <p>Keep creating. Keep sharing.</p>
     </div>
   </footer>
 
   <script src="posts.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      renderLatestPosts(document.getElementById('latest-posts'), 3);
+      initPage();
     });
   </script>
 </body>

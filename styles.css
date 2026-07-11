@@ -64,7 +64,23 @@ img {
   font-weight: 600;
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav button:hover {
+  color: var(--accent);
+}
+
+.site-nav button {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+
+.site-nav button.active {
+  background: var(--accent-soft);
   color: var(--accent);
 }
 
@@ -158,6 +174,136 @@ img {
   color: var(--accent);
   text-decoration: none;
   font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tab-button.active {
+  background: var(--accent-soft);
+  border-color: rgba(183, 99, 77, 0.2);
+  color: var(--accent);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.post-form {
+  display: grid;
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.post-form label {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.post-form input,
+.post-form select,
+.post-form textarea {
+  width: 100%;
+  background: #fcf8f3;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  color: var(--text);
+}
+
+.post-form textarea {
+  min-height: 140px;
+}
+
+.form-message {
+  margin: 0;
+  color: var(--accent);
+  min-height: 1.2rem;
+}
+
+.post-detail {
+  margin-top: 2rem;
+}
+
+.post-detail.hidden {
+  display: none;
+}
+
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.filter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filter-links button {
+  background: #f9e8e3;
+  color: #974d3f;
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.filter-links button.active {
+  background: var(--accent);
+  color: white;
+}
+
+.no-posts {
+  color: var(--muted);
 }
 
 .post-grid {
