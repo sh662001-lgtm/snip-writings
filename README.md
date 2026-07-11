@@ -39,4 +39,19 @@ Because this site is static, you can publish it to any static host:
 - Vercel
 - Cloudflare Pages
 
-Just upload the folder contents or connect your repository.
+### Publish using GitHub Pages
+
+1. Create a new GitHub repository named `snip-writings` (or similar).
+2. Push this folder to the repository:
+
+   ```powershell
+   cd C:\Users\sh662\.grok\snip-writings
+   git remote add origin https://github.com/YOUR_USERNAME/snip-writings.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. In GitHub, enable Pages on the `main` branch and set the folder to `/ (root)`.
+4. Your site will appear at `https://YOUR_USERNAME.github.io/snip-writings/`.
+
+If you'd like, I can also help you create the repository and push the files from your machine.
