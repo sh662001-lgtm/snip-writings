@@ -54,4 +54,29 @@ Because this site is static, you can publish it to any static host:
 3. In GitHub, enable Pages on the `main` branch and set the folder to `/ (root)`.
 4. Your site will appear at `https://YOUR_USERNAME.github.io/snip-writings/`.
 
-If you'd like, I can also help you create the repository and push the files from your machine.
+### Custom domain setup
+
+This repo already includes a `CNAME` file with:
+
+```text
+snipwritings.com
+```
+
+To use `snipwritings.com`, do this:
+
+1. Register the domain with a domain registrar such as Namecheap, Google Domains, or GoDaddy.
+2. In your registrar’s DNS settings, add these records:
+   - A record for `@` pointing to `185.199.108.153`
+   - A record for `@` pointing to `185.199.109.153`
+   - A record for `@` pointing to `185.199.110.153`
+   - A record for `@` pointing to `185.199.111.153`
+   - CNAME record for `www` pointing to `sh662001-lgtm.github.io.`
+3. In your GitHub repository settings, under Pages, enter `snipwritings.com` as the custom domain.
+4. Wait a few minutes for DNS to propagate.
+
+After that, your site will work at:
+
+- `https://snipwritings.com`
+- `https://www.snipwritings.com` (if you add the `www` CNAME)
+
+If you want, I can now help you register the domain and verify the DNS setup step by step.
