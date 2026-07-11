@@ -97,6 +97,23 @@ img {
   background: rgba(183, 99, 77, 0.08);
 }
 
+.owner-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.owner-toggle.active {
+  background: var(--accent);
+  color: white;
+  border-color: rgba(183, 99, 77, 0.4);
+}
+
 .intro {
   padding: 2.5rem 0 1.5rem;
 }
@@ -352,6 +369,22 @@ img {
   color: var(--accent);
   font-weight: 700;
   text-decoration: none;
+}
+
+.post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
 }
 
 .post-meta {

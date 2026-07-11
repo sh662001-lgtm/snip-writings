@@ -1,6 +1,9 @@
 const categories = ['Stories', 'Politics', 'Food', 'Books', 'Opinion'];
 const STORAGE_KEY = 'snipWritingsPosts';
+const OWNER_MODE_KEY = 'snipWritingsOwnerMode';
 const postsData = [];
+let editingPostId = null;
+let ownerMode = false;
 
 function loadSavedPosts() {
   try {
@@ -12,6 +15,22 @@ function loadSavedPosts() {
 
 function savePosts(posts) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+}
+
+function getOwnerMode() {
+  return localStorage.getItem(OWNER_MODE_KEY) === 'true';
+}
+
+function setOwnerMode(value) {
+  ownerMode = value;
+  localStorage.setItem(OWNER_MODE_KEY, String(value));
+  const button = document.getElementById('owner-toggle');
+  if (button) {
+    button.classList.toggle('active', ownerMode);
+    button.setAttribute('aria-pressed', String(ownerMode));
+    button.textContent = ownerMode ? 'Owner mode on' : 'Owner mode';
+  }
+  renderPostList();
 }
 
 function allPosts() {
@@ -39,9 +58,11 @@ function createSlug(text) {
 }
 
 function initPage() {
+  ownerMode = getOwnerMode();
   populateCategoryOptions();
   bindTabs();
   bindForm();
+  bindOwnerToggle();
   renderCategoryFilters();
   renderPostList();
   setDefaultDate();
@@ -58,6 +79,17 @@ function bindTabs() {
     button.addEventListener('click', () => {
       switchTab(button.dataset.tab);
     });
+  });
+}
+
+function bindOwnerToggle() {
+  const ownerToggle = document.getElementById('owner-toggle');
+  if (!ownerToggle) return;
+  ownerToggle.classList.toggle('active', ownerMode);
+  ownerToggle.setAttribute('aria-pressed', String(ownerMode));
+  ownerToggle.textContent = ownerMode ? 'Owner mode on' : 'Owner mode';
+  ownerToggle.addEventListener('click', () => {
+    setOwnerMode(!ownerMode);
   });
 }
 
@@ -103,12 +135,14 @@ function saveNewPost() {
 
   if (!title || !category || !excerpt || !content) {
     message.textContent = 'Please complete every field before saving your post.';
+    message.style.color = 'var(--accent)';
     return;
   }
 
-  const id = `${createSlug(title)}-${Date.now()}`;
+  const posts = loadSavedPosts();
+  const postId = editingPostId || `${createSlug(title)}-${Date.now()}`;
   const post = {
-    id,
+    id: postId,
     title,
     date: dateValue ? formatDate(dateValue) : formatDate(''),
     category,
@@ -116,11 +150,22 @@ function saveNewPost() {
     content: content.split('\n').map(line => `<p>${line.trim()}</p>`).join(''),
   };
 
-  const posts = loadSavedPosts();
-  posts.unshift(post);
-  savePosts(posts);
+  let nextPosts;
+  if (editingPostId) {
+    nextPosts = posts.map(item => (item.id === editingPostId ? post : item));
+    message.textContent = 'Your post has been updated.';
+  } else {
+    nextPosts = [post, ...posts];
+    message.textContent = 'Your post has been saved. It is now visible in Posts.';
+  }
 
-  message.textContent = 'Your post has been saved. It is now visible in Posts.';
+  savePosts(nextPosts);
+  editingPostId = null;
+  const submitButton = document.querySelector('#post-form button[type="submit"]');
+  if (submitButton) {
+    submitButton.textContent = 'Save post';
+  }
+
   message.style.color = 'var(--accent)';
   document.getElementById('post-form').reset();
   setDefaultDate();
@@ -163,6 +208,15 @@ function renderPostList(category = '') {
       }
     });
   });
+
+  if (ownerMode) {
+    document.querySelectorAll('.edit-post').forEach(button => {
+      button.addEventListener('click', () => editPost(button.dataset.id));
+    });
+    document.querySelectorAll('.delete-post').forEach(button => {
+      button.addEventListener('click', () => deletePost(button.dataset.id));
+    });
+  }
 }
 
 function renderCard(post) {
@@ -172,9 +226,44 @@ function renderCard(post) {
       <h3>${post.title}</h3>
       <p class="post-meta">${post.date}</p>
       <p>${post.excerpt}</p>
-      <button class="link-button read-more" type="button" data-id="${post.id}">Read more →</button>
+      <div class="post-actions">
+        <button class="link-button read-more" type="button" data-id="${post.id}">Read more →</button>
+        ${ownerMode ? `<button class="link-button edit-post" type="button" data-id="${post.id}">Edit</button><button class="link-button delete-post" type="button" data-id="${post.id}">Delete</button>` : ''}
+      </div>
     </article>
   `;
+}
+
+function editPost(id) {
+  const post = allPosts().find(item => item.id === id);
+  if (!post) return;
+
+  editingPostId = id;
+  document.getElementById('post-title').value = post.title;
+  document.getElementById('post-date').value = new Date(post.date).toISOString().slice(0, 10);
+  document.getElementById('post-category').value = post.category;
+  document.getElementById('post-excerpt').value = post.excerpt;
+  document.getElementById('post-content').value = post.content.replace(/<\/?p>/g, '\n').trim();
+
+  const submitButton = document.querySelector('#post-form button[type="submit"]');
+  if (submitButton) {
+    submitButton.textContent = 'Save changes';
+  }
+
+  switchTab('new-post');
+  const message = document.getElementById('form-message');
+  message.textContent = 'Editing your post. Make changes and save.';
+  message.style.color = 'var(--accent)';
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post? This cannot be undone.')) {
+    return;
+  }
+
+  const posts = loadSavedPosts().filter(post => post.id !== id);
+  savePosts(posts);
+  renderPostList();
 }
 
 function renderPostDetail(post) {
